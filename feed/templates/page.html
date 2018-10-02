@@ -1,0 +1,23 @@
+{% if inserzioni %}
+  <ul>
+  {% for ins in inserzioni %}
+  	<li>{{ ins.titolo }}</li>
+  {% endfor %}
+ {% endif %}
+  <div class="pagination">
+    <span class="step-links">
+        {% if inserzioni.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ inserzioni.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ inserzioni.number }} of {{ inserzioni.paginator.num_pages }}.
+        </span>
+
+        {% if inserzioni.has_next %}
+            <a href="?page={{ inserzioni.next_page_number }}">next</a>
+            <a href="?page={{ inserzioni.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
