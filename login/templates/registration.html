@@ -1,0 +1,11 @@
+<BODY>
+        Yaaay Registration Form!!
+        <FORM id="user_form" method="post" action="/register/" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ uform.as_p }}
+                {{ pform.as_p }}
+                
+                <INPUT type="submit" name="submit" value="Gooooo" />
+        </FORM>
+
+</BODY>

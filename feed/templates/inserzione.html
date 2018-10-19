@@ -1,0 +1,14 @@
+<body>
+<p> Titolo ={{ins.titolo}} </p>
+<p> ID= {{ins.id}} </p>
+<p> Descrizione={{ins.descrizione}} </p>
+<p> Venditore={{ins.venditore}} </p>
+<p> Interessati={%for int in interessati %}
+                 {{int}}, 
+                 {% endfor %} </p>
+<p> Offerenti={%for off in offerenti%}
+                 {{off}}, 
+                 {% endfor %} </p>
+<p> Indirizzo={{ins.indirizzo}} </p>
+<p> Prezzo={{ins.max_prezzo}} € </p>
+</body>

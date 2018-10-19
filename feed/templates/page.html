@@ -1,9 +1,10 @@
 {% if inserzioni %}
   <ul>
   {% for ins in inserzioni %}
-  	<li>{{ ins.titolo }}</li>
+  	<li><a href="/feed/{{ins.id}}"> {{ ins.titolo }} </li>
   {% endfor %}
  {% endif %}
+ 
   <div class="pagination">
     <span class="step-links">
         {% if inserzioni.has_previous %}
