@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
 from .forms import *
 from django.db import transaction
+
 
 
 # Create your views here.
@@ -30,7 +30,10 @@ def register(request):
         uform= UserForm()
         pform=ProfileForm()
         
-    return render(request, 'registration.html', {'uform': uform, 'pform': pform})
+    return render(request, 'registration/registration.html', {'uform': uform, 'pform': pform})
+
+
+        
+
     
         
-    

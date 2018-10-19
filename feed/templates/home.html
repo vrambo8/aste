@@ -1,4 +1,11 @@
 <body>
+{% if utente.is_active %}
 <font size = "45"> Benvenuta/o {{ utente.username }}</font>
 <a href="/feed"> Entra </a>
+<a href="/logout"> Logout </a>
+{% else %} 
+<a href="/login"> Login Here!</a>
+Not a member yet?
+<a href= "/register"> Register Here! </a>
+{% endif %}
 </body>
