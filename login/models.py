@@ -1,11 +1,11 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import authenticate
+
 # Create your models here.
-from feed.models import *
+from feed.models import User, Profile
 from django import forms
-from django.contrib.admin.utils import help_text_for_field
+
 
 class UserForm(forms.ModelForm):
     password2=forms.CharField(max_length=30, label="Confirm Password")
@@ -18,7 +18,9 @@ class UserForm(forms.ModelForm):
         
         def hasNumbers(str):
             return any(char.isdigit() for char in str)
+        
         validators=[]
+        
         if len(username)>20 or len(username)<8:
             validators.append(ValidationError(_("Username needs to be 8 to 20 characters long"),code="length username"))
         if len(password)>20 or len(password)<8:

@@ -7,5 +7,5 @@ from login.forms import UtenteLoginForm
 urlpatterns= [
     path('register/', views.register, name="register"),
     path('login/', LoginView.as_view(authentication_form=UtenteLoginForm), name= 'login'),
-    path('logout/', LogoutView.as_view(next_page='home'))    
+    path('logout/', LogoutView.as_view(next_page='home'), name= 'logout')    
     ]

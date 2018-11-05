@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'feed.apps.FeedConfig',
     'login.apps.LoginConfig',
+    'insertion_handling.apps.InsertionHandlingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,5 +124,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL= '/login/' 
-LOGIN_REDIRECT_URL= '/feed/'
+LOGIN_REDIRECT_URL= '/feed'
 LOGOUT_REDIRECT_URL= ''

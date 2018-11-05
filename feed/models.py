@@ -14,12 +14,14 @@ class Inserzione (models.Model):
     titolo=models.CharField(max_length=50)
     uuid=ShortUUID()
     id=models.CharField(max_length=30, primary_key=True, unique=True, default=uuid.uuid())
-    descrizione=models.CharField(max_length=500, default='')
+    descrizione=models.TextField(max_length=500, default='')
     venditore=models.ForeignKey('Profile', on_delete=models.CASCADE, related_name="venditore", blank=False)
     interessati=models.ManyToManyField('Profile', related_name="interessati", default=[])
     offerenti=models.ManyToManyField('Profile', related_name="offerenti", default=[])
-    indirizzo=models.CharField(max_length=50, blank=False)
+    indirizzo=models.CharField(max_length=50, blank=False, default='')
     max_prezzo=models.IntegerField(blank=False)
+    prezzo=models.IntegerField(blank=False, default=0)
+    immagine=models.ImageField(blank=True)
     
     class Meta:
         verbose_name=_('insertion')
@@ -48,6 +50,8 @@ def create_user_profile( sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile( sender, instance, **kwargs):
             instance.profile.save()
+            
+
         
     
         

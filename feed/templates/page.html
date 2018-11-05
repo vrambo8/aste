@@ -1,7 +1,7 @@
 {% if inserzioni %}
   <ul>
   {% for ins in inserzioni %}
-  	<li><a href="/feed/{{ins.id}}"> {{ ins.titolo }} </li>
+  	<li><a href="/{{ins.id}}"> {{ ins.titolo }} </li>
   {% endfor %}
  {% endif %}
  
