@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from shortuuid import ShortUUID
+import shortuuid
 
 
 from django.db import models
@@ -12,8 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 class Inserzione (models.Model):
     titolo=models.CharField(max_length=50)
-    uuid=ShortUUID()
-    id=models.CharField(max_length=30, primary_key=True, unique=True, default=uuid.uuid())
+    
+    id=models.CharField(max_length=30, primary_key=True, unique=True, default=shortuuid.uuid())
     descrizione=models.TextField(max_length=500, default='')
     venditore=models.ForeignKey('Profile', on_delete=models.CASCADE, related_name="venditore", blank=False)
     interessati=models.ManyToManyField('Profile', related_name="interessati", default=[])
@@ -34,7 +34,6 @@ class Profile (models.Model):
     user= models.OneToOneField(User, on_delete=models.CASCADE)
     partita_iva=models.CharField(max_length=50)
     luogo=models.CharField(max_length=50, blank=True)
-    
     class Meta:
         verbose_name=_('user')
         verbose_name_plural=_('users')

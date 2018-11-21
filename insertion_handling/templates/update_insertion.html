@@ -1,6 +1,6 @@
 <BODY>
 	Update your new insertion and ask the world for what you need!!
-	<FORM id="insertion_form" method="post" action="/new_ins/" enctype="multipart/form-data">
+	<FORM id="insertion_form" method="post" action="/feed/{{ins.id}}/update_ins/" enctype="multipart/form-data">
 			{% csrf_token %}
 			{% for field in form %}
 			{% if field == form.max_prezzo %}

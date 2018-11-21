@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from .models import *
+from insertion_handling import views
 
 # Create your views here.
 def home_page(request):
@@ -24,17 +25,7 @@ def page(request):
         }
     return render(request,'page.html', context)
 
-def inserzione(request, ins_id):
-    ins=Inserzione.objects.get(id=ins_id)
-    offerenti=ins.offerenti.all()
-    print(offerenti)
-    interessati=ins.interessati.all()
-    context= {
-        'ins': ins,
-        'offerenti' : offerenti,
-        'interessati' : interessati
-        }
-    return render(request, 'inserzione.html', context)
+
     
     
     

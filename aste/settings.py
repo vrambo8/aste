@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'feed.apps.FeedConfig',
-    'login.apps.LoginConfig',
+    'profile_handling.apps.ProfileHandlingConfig',
     'insertion_handling.apps.InsertionHandlingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,6 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_URL= '/login/' 
+LOGIN_URL= '/profile_handling/' 
 LOGIN_REDIRECT_URL= '/feed'
 LOGOUT_REDIRECT_URL= ''

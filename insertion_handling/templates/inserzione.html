@@ -1,0 +1,30 @@
+<body>
+<p> Titolo ={{ins.titolo}} </p>
+<p> Descrizione={{ins.descrizione}} </p>
+<p> Venditore={{ins.venditore}} </p>
+<p> Interessati={%for int in interessati %}
+                 {{int}}, 
+                 {% endfor %} </p>
+<p> Offerenti={% for off in offerenti %}
+                 {{off}}, 
+                 {% endfor %} </p>
+<p> Indirizzo={{ins.indirizzo}} </p>
+<p> Max Prezzo={{ins.max_prezzo}} € </p>
+{% if allowed %}
+<a href="update_ins/">Update your insertion!</a>
+{% endif %}
+{% if user not in interessati %}
+<FORM id="interested_form" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<button type="submit" name="interested">Mi interessa</button>
+</FORM>
+{% else %}
+<FORM id="uninterested_form" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<button type="submit" name="uninterested">Non mi interessa</button>
+</FORM>
+{% endif %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+</body>
