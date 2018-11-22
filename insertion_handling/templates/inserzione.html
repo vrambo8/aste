@@ -9,7 +9,11 @@
                  {{off}}, 
                  {% endfor %} </p>
 <p> Indirizzo={{ins.indirizzo}} </p>
-<p> Max Prezzo={{ins.max_prezzo}} € </p>
+<FORM id="bidding_form" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{{ bid_form.as_p }}
+<button type="submit" name="bid">Fai un'offerta</button>
+</FORM>
 {% if allowed %}
 <a href="update_ins/">Update your insertion!</a>
 {% endif %}
@@ -23,6 +27,7 @@
 {% csrf_token %}
 <button type="submit" name="uninterested">Non mi interessa</button>
 </FORM>
+
 {% endif %}
 {% for message in messages %}
     <p>{{ message }}</p>

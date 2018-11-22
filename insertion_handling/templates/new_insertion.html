@@ -1,14 +1,8 @@
 <BODY>
 	Create your new insertion and ask the world for what you need!!
-	<FORM id="insertion_form" method="post" action="/new_ins/" enctype="multipart/form-data">
+	<FORM id="insertion_form" method="post"  enctype="multipart/form-data">
 			{% csrf_token %}
-			{% for field in form %}
-			{% if field == form.max_prezzo %}
-			<p>{{ field.label_tag }} {{ field }} €</p>
-			{% else %}
-			<p>{{ field.label_tag }} {{ field }}</p>
-			{% endif %}
-			{% endfor %}
+			{{ form.as_p }}
 			<INPUT type="submit" name="submit" value="FUK YEEEE" />
 	</FORM>
 </BODY>

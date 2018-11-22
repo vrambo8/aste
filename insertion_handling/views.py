@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from insertion_handling.models import InsertionForm
+from .models import InsertionForm, BiddingForm
 from django.contrib.auth.decorators import login_required
 from feed.models import Inserzione
 from django.contrib import messages
+from insertion_handling.models import BiddingForm
 # Create your views here.
 def inserzione(request, ins_id):
     ins=Inserzione.objects.get(id=ins_id)
@@ -11,18 +12,27 @@ def inserzione(request, ins_id):
     user=request.user.profile
     allowed= ins.venditore==user
     if request.method=='POST':
+        bid_form=BiddingForm(data=request.POST, instance=ins)
         if 'interested' in request.POST:
             interessati.add(user)
-            redirect('inserzione', ins_id=ins_id)
-        if 'uninterested'in request.POST:
+            return redirect('inserzione', ins_id=ins_id)
+        if 'uninterested' in request.POST:
             interessati.remove(user)
-            redirect('inserzione', ins_id=ins_id)
+            return redirect('inserzione', ins_id=ins_id)
+        if 'bid' in request.POST:
+            if bid_form.is_valid():
+                bid_form.save()
+                offerenti.add(user)
+                return redirect('inserzione', ins_id=ins_id)
+    else:
+        bid_form=BiddingForm(instance=ins)       
     context= {
         'ins': ins,
         'offerenti' : offerenti.all(),
         'interessati' : interessati.all(),
         'user': user,
-        'allowed': allowed
+        'allowed': allowed,
+        'bid_form':bid_form
         
         }
     return render(request, 'inserzione.html', context)
@@ -32,8 +42,6 @@ def new_insertion(request):
     if (request.method=="POST"):
         form=InsertionForm(request.POST)
         if form.is_valid():
-            ins=form.instance
-            ins.venditore=request.user.profile
             form.save()
             
             return redirect('feed')
@@ -61,11 +69,5 @@ def update_insertion(request, ins_id):
             return redirect("inserzione", ins_id=ins_id)
     return render(request, 'update_insertion.html', {'form': form, 'ins': ins})
 
-def interested(request, ins_id):
-    user=request.user.profile
-    ins=Inserzione.objects.get(id=ins_id)
-    if (request.method=="POST"):
-        ins.interessati.append(user)
-    return redirect("inserzione", ins_id=ins_id)
-        
+
         
